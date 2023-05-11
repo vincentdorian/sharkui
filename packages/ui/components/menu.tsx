@@ -1,59 +1,59 @@
 import {defineComponent} from "vue"
 
-import * as Ark from "@ark-ui/vue";
+import {Menu, MenuItem, MenuContent, MenuTrigger} from "@ark-ui/vue";
 
-const Menu = defineComponent({
-    name: "Menu",
+const SharkMenu = defineComponent({
+    name: "SharkMenu",
     setup(_, {slots}) {
         return () => {
             return (
-                <Ark.Menu class={"max-w-3xl w-full"}>
+                <Menu class={"max-w-3xl w-full"}>
                     {slots.default?.()}
-                </Ark.Menu>  
+                </Menu>  
             )
         }
     },
 });
 
-const MenuItem = defineComponent({
-    name: "MenuItem",
+const SharkMenuItem = defineComponent({
+    name: "SharkMenuItem",
     setup(_, {slots}) {
         return () => {
             return (
-                <Ark.MenuItem>
+                <MenuItem>
                     {slots.default?.()}
-                </Ark.MenuItem>  
+                </MenuItem>  
             )
         }
     },
 });
 
-const MenuTrigger = defineComponent({
-    name: "MenuTrigger",
+const SharkMenuTrigger = defineComponent({
+    name: "SharkMenuTrigger",
     setup(_, {slots}) {
         return () => {
             return (
-                <Ark.MenuTrigger>
+                <MenuTrigger>
                     {slots.default?.()}
-                </Ark.MenuTrigger>
+                </MenuTrigger>
             )
         }
     },
 });
 
-const MenuContent = defineComponent({
-    name: "MenuContent",
+const SharkMenuContent = defineComponent({
+    name: "SharkMenuContent",
     setup(_, {slots}) {
         return () => {
             return (
-                <Ark.MenuContent>
+                <MenuContent>
                     {slots.default?.()}
-                </Ark.MenuContent>  
+                </MenuContent>  
             )
         }
     },
 });
 
-export {Menu, MenuItem, MenuContent, MenuTrigger}
+export {SharkMenu as Menu, SharkMenuItem as MenuItem, SharkMenuTrigger as MenuTrigger, SharkMenuContent as MenuContent}
 
 

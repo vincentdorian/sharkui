@@ -1,19 +1,23 @@
 {
-  "name": "nuxt-app",
+  "name": "@shark/web",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt generate",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.6.7",
     "@types/node": "^18",
-    "nuxt": "^3.4.3"
+    "autoprefixer": "^10.4.14",
+    "nuxt": "^3.4.3",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2"
   },
   "dependencies": {
-    "ui": "workspace:*"
+    "@nuxtjs/color-mode": "^3.2.0",
+    "@shark/ui": "workspace:^",
+    "@vueuse/core": "^10.1.2",
+    "tailwindcss-animate": "^1.0.5"
   }
 }
