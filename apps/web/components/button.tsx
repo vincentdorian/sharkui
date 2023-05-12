@@ -1,5 +1,6 @@
-import { VariantProps, cva } from "class-variance-authority"
-import { defineComponent } from "vue"
+import { VariantProps, cva } from "class-variance-authority";
+import { defineComponent } from "vue";
+import type { ButtonHTMLAttributes } from "vue";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
@@ -27,30 +28,23 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
-const Button = defineComponent({
-    name: "Button",
-    props: {
-        variant: {
-            type: String,
-            default: "default",
-        },
-        size: {
-            type: String,
-            default: "default",
-        },
-    },
-    setup(_, {slots, attrs}) {
-      console.log(attrs)
-        return () => {
-            return (
-                <button class={buttonVariants(attrs)} {...attrs}>
-                    {slots.default?.()}
-                </button>  
-            )
-        }
-    },
-})
+export interface ButtonProps
+  extends ButtonHTMLAttributes,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
 
-export { Button, buttonVariants }
+const Button = defineComponent((props: ButtonProps, { slots }) => {
+  const { variant, size } = props;
+  const classes = buttonVariants({ variant, size });
+
+  console.log(props);
+
+  return () => {
+    return <button class={classes}>{slots.default?.()}</button>;
+  };
+});
+
+export { Button, buttonVariants };
