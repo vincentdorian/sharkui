@@ -1,15 +1,19 @@
+import useConfig from "./use-config"
+
 export function getPackageManager() {
-    const userAgent = process.env.npm_config_user_agent
+    const { getConfig } = useConfig()
+
+    const packageManager = getConfig("packageManager")
   
-    if (!userAgent) {
+    if (!packageManager) {
       return "npm"
     }
   
-    if (userAgent.startsWith("yarn")) {
+    if (packageManager.startsWith("yarn")) {
       return "yarn"
     }
   
-    if (userAgent.startsWith("pnpm")) {
+    if (packageManager.startsWith("pnpm")) {
       return "pnpm"
     }
   

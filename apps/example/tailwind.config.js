@@ -1,17 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-const { fontFamily } = require("tailwindcss/defaultTheme")
-
 module.exports = {
-  darkMode: 'class',
+  darkMode: ["class"],
   content: [
-    "./components/**/*.{js,vue,ts,tsx}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
-    "./app.vue",
-    "./assets/**/*.css",
-  ],
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+	],
   theme: {
     container: {
       center: true,
@@ -57,12 +51,9 @@ module.exports = {
         },
       },
       borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-      },
-      fontFamily: {
-        sans: [...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
@@ -82,4 +73,3 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 }
-

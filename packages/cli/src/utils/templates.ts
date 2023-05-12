@@ -80,14 +80,6 @@ export const STYLES = `@tailwind base;
   }
 }`
 
-export const UTILS = `import { ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
- 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-`
-
 export const TAILWIND_CONFIG = `/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -162,4 +154,12 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+}`
+
+export const SHARKUI_CONFIG_NUXT = `{
+  "srcDir": ".",
+  "componentsDir": "./components",
+  "layoutsDir": "./layouts",
+  "cssDir": "./assets/css",
+  "cssFileName": "main.css"
 }`

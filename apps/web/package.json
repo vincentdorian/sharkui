@@ -1,5 +1,5 @@
 {
-  "name": "@shark/web",
+  "name": "@sharkui/web",
   "private": true,
   "scripts": {
     "build": "nuxt generate",
@@ -16,8 +16,9 @@
   },
   "dependencies": {
     "@nuxtjs/color-mode": "^3.2.0",
-    "@shark/ui": "workspace:^",
+    "@sharkui/vue": "workspace:^",
     "@vueuse/core": "^10.1.2",
+    "class-variance-authority": "^0.6.0",
     "tailwindcss-animate": "^1.0.5"
   }
 }

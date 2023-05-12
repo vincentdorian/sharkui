@@ -20,7 +20,7 @@ export type Component = z.infer<typeof componentSchema>
 
 const componentsSchema = z.array(componentSchema)
 
-export async function getAvailableComponents() {
+export async function getAvailableComponents(){
   try {
     const response = await fetch(`${baseUrl}/api/components`)
     const components = await response.json()

@@ -1,9 +1,9 @@
 import {defineComponent} from "vue"
 
-import {Menu, MenuItem, MenuContent, MenuTrigger} from "@ark-ui/vue";
+import { Menu, MenuItem, MenuContent, MenuTrigger } from "@ark-ui/vue";
 
 const SharkMenu = defineComponent({
-    name: "SharkMenu",
+    name: "Menu",
     setup(_, {slots}) {
         return () => {
             return (
@@ -16,7 +16,7 @@ const SharkMenu = defineComponent({
 });
 
 const SharkMenuItem = defineComponent({
-    name: "SharkMenuItem",
+    name: "MenuItem",
     setup(_, {slots}) {
         return () => {
             return (
@@ -29,7 +29,7 @@ const SharkMenuItem = defineComponent({
 });
 
 const SharkMenuTrigger = defineComponent({
-    name: "SharkMenuTrigger",
+    name: "MenuTrigger",
     setup(_, {slots}) {
         return () => {
             return (
@@ -42,7 +42,7 @@ const SharkMenuTrigger = defineComponent({
 });
 
 const SharkMenuContent = defineComponent({
-    name: "SharkMenuContent",
+    name: "MenuContent",
     setup(_, {slots}) {
         return () => {
             return (
