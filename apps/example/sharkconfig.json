@@ -1,8 +1,0 @@
-{
-  "srcDir": ".",
-  "componentsDir": "./components",
-  "layoutsDir": "./layouts",
-  "cssDir": "./assets/css",
-  "cssFileName": "main.css",
-  "packageManager": "pnpm"
-}

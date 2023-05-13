@@ -12,5 +12,8 @@
     "turbo": "^1.9.3"
   },
   "packageManager": "pnpm@7.15.0",
-  "name": "sharkui"
+  "name": "sharkui",
+  "dependencies": {
+    "nuxt": "^3.4.3"
+  }
 }
