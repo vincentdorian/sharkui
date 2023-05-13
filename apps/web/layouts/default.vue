@@ -14,7 +14,7 @@ const toggleColorMode = () => {
 };
 </script>
 <template>
-  <div className="relative flex min-h-screen flex-col">
+  <div class="relative flex min-h-screen flex-col">
     <header
       class="supports-backdrop-blur:bg-background/60 sticky top-0 z-40 w-full border-b bg-background/95 shadow-sm backdrop-blur"
     >
@@ -67,27 +67,25 @@ const toggleColorMode = () => {
         </div>
       </div>
     </header>
-    <main class="flex-1">
-      <div className="container relative">
-        <slot />
-      </div>
-    </main>
-    <footer className="border-t py-6 md:py-0 -mb-20">
+    <div class="flex-1 w-full">
+      <slot />
+    </div>
+    <footer class="border-t py-6 md:py-0 -mb-20">
       <div
-        className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row"
+        class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row"
       >
         <div
-          className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0"
+          class="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0"
         >
           <p
-            className="text-center text-sm leading-loose text-muted-foreground md:text-left"
+            class="text-center text-sm leading-loose text-muted-foreground md:text-left"
           >
             Styles copied from {{ " " }}
             <a
               href="https://ui.shadcn.com"
               target="_blank"
               rel="noreferrer"
-              className="font-medium underline underline-offset-4"
+              class="font-medium underline underline-offset-4"
             >
               shadcn/ui
             </a>
@@ -97,7 +95,7 @@ const toggleColorMode = () => {
               href="https://ark-ui.com"
               target="_blank"
               rel="noreferrer"
-              className="font-medium underline underline-offset-4"
+              class="font-medium underline underline-offset-4"
             >
               Ark UI
             </a>
@@ -107,7 +105,7 @@ const toggleColorMode = () => {
               href="https://github.com/vincentdorian/sharkui"
               target="_blank"
               rel="noreferrer"
-              className="font-medium underline underline-offset-4"
+              class="font-medium underline underline-offset-4"
             >
               GitHub
             </a>

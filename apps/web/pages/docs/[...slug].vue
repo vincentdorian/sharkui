@@ -4,13 +4,9 @@ import { ChevronRight } from "lucide-vue-next";
 const { page } = useContent();
 
 useContentHead(page);
-
-definePageMeta({
-  layout: "sidebar",
-});
 </script>
 <template>
-  <NuxtLayout>
+  <NuxtLayout name="sidebar">
     <main
       class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]"
     >
@@ -24,11 +20,11 @@ definePageMeta({
           <ChevronRight class="h-4 w-4" />
           <div class="font-medium text-foreground">{{ page.title }}</div>
         </div>
-        <div className="space-y-2">
+        <div  class="space-y-2">
           <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
             {{ page.title }}
           </h1>
-          <p v-if="page.description" className="text-lg text-muted-foreground">
+          <p v-if="page.description" class="text-lg text-muted-foreground">
             {{ page.description }}
           </p>
         </div>

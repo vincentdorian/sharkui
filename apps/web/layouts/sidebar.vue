@@ -9,7 +9,7 @@ const contentNavigation: {
 }[] = [
   {
     label: "Getting Started",
-    path: "/docs",
+    path: "/docs/",
     query: {where: [{group: "Getting Started"}]},
   },
   {
@@ -26,12 +26,12 @@ const contentNavigation: {
       <aside
         class="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r md:sticky md:block py-8"
       >
-        <div className="w-full space-y-4">
+        <div class="w-full space-y-4">
           <div v-for="content in contentNavigation">
             <h4 class="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
             {{ content.label }}
           </h4>
-          <ContentList :path="content.path" :query="content.query" v-slot="{ list }">
+          <ContentList :path="content.path" :query="content?.query" v-slot="{ list }">
             <div
               v-for="item in list"
               :key="item._path"

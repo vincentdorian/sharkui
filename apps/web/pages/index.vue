@@ -14,10 +14,11 @@ useHead({
 });
 </script>
 <template>
-  <NuxtLayout>
-    <section
-      class="flex max-w-[980px] flex-col items-start gap-2 px-4 pt-8 md:pt-12"
+  <NuxtLayout name="default">
+      <section
+      class="container "
     >
+    <div class="flex max-w-[980px] flex-col items-start gap-2 px-4 pt-8 md:pt-12 justify-start">
       <h1
         class="text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl lg:leading-[1.1]"
       >
@@ -49,6 +50,8 @@ useHead({
           Github
         </a>
       </div>
+    </div>
+     
     </section>
   </NuxtLayout>
 </template>
