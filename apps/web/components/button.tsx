@@ -36,15 +36,39 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
-const Button = defineComponent((props: ButtonProps, { slots }) => {
-  const { variant, size } = props;
-  const classes = buttonVariants({ variant, size });
+const Button = defineComponent({
+  name: "Button",
+  props: {
+    asChild: {
+      type: Boolean,
+      default: false,
+    },
+    variant: {
+      type: String as PropType<ButtonProps["variant"]>,
+      default: "default",
+    },
+    size: {
+      type: String as PropType<ButtonProps["size"]>,
+      default: "default",
+    },
+    type: {
+      type: String as PropType<ButtonProps["type"]>,
+      default: "button",
+    },
+  },
+  setup(props, { slots, attrs }) {
+    const { variant, size, asChild, type } = props;
+    const classes = buttonVariants({ variant, size });
 
-  console.log(props);
-
-  return () => {
-    return <button class={classes}>{slots.default?.()}</button>;
-  };
+    /* if class in attrs then */
+    if (attrs.class) {
+      attrs.class = `${attrs.class} ${classes}`;
+    }
+    
+    return () => {
+      return <button class={classes} {...attrs}>{slots.default?.()}</button>;
+    };
+  },
 });
 
 export { Button, buttonVariants };
