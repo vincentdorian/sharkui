@@ -2,36 +2,70 @@
 import { existsSync, promises as fs } from "fs";
 import path from "path";
 import { Command } from "commander";
+import { detect } from "detect-package-manager";
 import { execa } from "execa";
 import ora from "ora";
 import prompts from "prompts";
 
-import { getPackageInfo } from "./utils/get-package-info";
-import { getPackageManager } from "./utils/get-package-manager";
-import { logger } from "./utils/logger";
 import {
-  STYLES,
-  TAILWIND_CONFIG,
-  SHARKUI_CONFIG_NUXT,
-} from "./utils/templates";
-import useConfig from "./utils/use-config";
+  BASE_DEPENDENCIES,
+  BASE_STYLES,
+  BASE_TAILWIND_CONFIG,
+} from "./templates/base";
+import {
+  NUXT_DEPENDENCIES,
+  NUXT_TAILWIND_CONTENT,
+  setupNuxt,
+} from "./templates/nuxt";
+import { getAvailableComponents, getComponents } from "./utils/get-components";
+import { getPackageInfo } from "./utils/get-package-info";
+import { logger } from "./utils/logger";
+import useSharkuiConfig from "./utils/use-sharkui-config";
+import useTailwindConfig from "./utils/use-tailwind-config";
 
 process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
 
-const FRAMEWORKS = ["nuxt", "laravel-inertiajs"];
+type Framework = {
+  name: string;
+  srcDir: string;
+  tailwindcssDir: string;
+  componentsDir: string;
+  layoutsDir: string;
+  disabled: boolean;
+  deps: string[];
+  tailwindContent: string[];
+  callback: () => void;
+};
 
-const DEV_DEPENDENCIES = [
-  "tailwindcss-animate",
-  "tailwindcss",
-  "autoprefixer",
-  "postcss"
+const FRAMEWORKS_OPTIONS: Array<Framework> = [
+  {
+    name: "nuxt",
+    srcDir: ".",
+    tailwindcssDir: "./assets/css/main.css",
+    componentsDir: "./components",
+    layoutsDir: "./layouts",
+    disabled: false,
+    deps: NUXT_DEPENDENCIES,
+    tailwindContent: NUXT_TAILWIND_CONTENT,
+    callback: setupNuxt,
+  },
+  {
+    name: "inertiajs-vue",
+    srcDir: "./resources/js",
+    tailwindcssDir: "./resources/css/app.css",
+    componentsDir: "./components",
+    layoutsDir: "./layouts",
+    disabled: false,
+    deps: [],
+    tailwindContent: [],
+    callback: () => {},
+  },
 ];
 
-const { getConfig, setConfig } = useConfig();
-
 async function main() {
-  const packageInfo = await getPackageInfo();
+  const packageInfo = getPackageInfo();
+  const { getConfig } = useSharkuiConfig();
 
   const program = new Command()
     .name("@sharkui/cli")
@@ -45,130 +79,151 @@ async function main() {
   program
     .command("init")
     .argument("[framework]", "option")
-    .description("Configure sharkui for your project.")
-    .action(async (framework, options) => {
-      if (!framework) {
+    .action(async (input, options) => {
+      let framework = null;
+
+      if (!input) {
         framework = await promptForFramework();
+      } else {
+        framework = FRAMEWORKS_OPTIONS.find((f) => f.name === input);
       }
 
-      logger.info(`Configuring sharkui for ${framework}...`);
+      await init(framework);
 
-      const sharkUiConfigDestination = "./sharkconfig.json";
-      const sharkUiConfigSpinner = ora(`Updating sharkconfig.json...`).start();
-      await fs.writeFile(sharkUiConfigDestination, SHARKUI_CONFIG_NUXT, "utf8");
-      sharkUiConfigSpinner.succeed();
+      await configureTailwind(framework);
 
-      /* promopt for package manager */
-      const selectedPackageManager = await promptForPackageManager();
+      await framework.callback();
+    });
 
-      setConfig("packageManager", selectedPackageManager);
+  program
+    .command("add")
+    .argument("[components]", "component to add")
+    .action(async (components, options) => {
+      let selection = null;
 
-      /* prompt for destination dir */
+      const config = await getConfig();
 
-      if (!options.yes) {
-        const { proceed } = await prompts({
-          type: "confirm",
-          name: "proceed",
-          message:
-            "Running this command will install dependencies and overwrite your existing tailwind.config.js. Proceed?",
-          initial: true,
+      if (!components) {
+        selection = await promptForComponents();
+      } else {
+        selection = components.split(" ");
+      }
+
+      const componentsData = await getComponents(selection);
+
+      componentsData.forEach((component) => {
+        const { name, files } = component;
+
+        files.forEach((file) => {
+          const { name, content } = file;
+
+          if (!existsSync(config.componentsDir)) {
+            fs.mkdir(config.componentsDir, { recursive: true });
+          }
+
+          const filePath = path.resolve(config.componentsDir, name);
+
+          fs.writeFile(filePath, content, "utf-8");
         });
-
-        if (!proceed) {
-          process.exit(0);
-        }
-      }
-
-      const packageManager = getPackageManager();
-
-      logger.info("Found package manager: " + packageManager);
-
-      const dependenciesSpinner = ora(`Installing dependencies...`).start();
-      await execa(packageManager, [
-        packageManager === "npm" ? "install" : "add",
-        "-D",
-        ...DEV_DEPENDENCIES,
-      ]);
-      dependenciesSpinner.succeed();
-
-      const tailwindDestination = "./tailwind.config.js";
-      const tailwindSpinner = ora(`Updating tailwind.config.js...`).start();
-      await fs.writeFile(tailwindDestination, TAILWIND_CONFIG, "utf8");
-      tailwindSpinner.succeed();
-
-      writeStyles();
+      });
     });
 
   program.parse();
+}
+
+async function init(framework: Framework) {
+  const { deps, ...rest } = framework;
+
+  logger.info(
+    "Initializing sharkui configuration for framework: " + framework.name
+  );
+
+  fs.writeFile("sharkui.config.json", JSON.stringify(rest, null, 4), "utf-8");
+
+  const pm = await detect();
+
+  logger.info(`Detected package manager: ${pm}`);
+
+  const spinner = ora("Installing dependencies").start();
+
+  const dependencies = [...deps, ...BASE_DEPENDENCIES];
+
+  try {
+    await execa(pm, ["install", "--save-dev", ...dependencies]);
+    spinner.succeed("Dependencies installed");
+  } catch (error) {
+    spinner.fail("Failed to install dependencies");
+    console.error(error);
+  }
 }
 
 async function promptForFramework() {
   const { framework } = await prompts({
     type: "select",
     name: "framework",
-    message: "Which framework are you using?",
+    message: "Which framework do you want to configure sharkui for?",
     hint: "Space to select.",
     instructions: false,
-    choices: FRAMEWORKS.map((f) => ({
-      title: f,
-      value: f,
+    choices: FRAMEWORKS_OPTIONS.map((f) => ({
+      title: f.name,
+      disabled: f.disabled,
+      value: {
+        name: f.name,
+        srcDir: f.srcDir,
+        tailwindcssDir: f.tailwindcssDir,
+        componentsDir: f.componentsDir,
+        layoutsDir: f.layoutsDir,
+        deps: f.deps,
+        callback: f.callback,
+      },
     })),
   });
 
   return framework;
 }
 
-async function promptForPackageManager() {
-  const { packageManager } = await prompts({
-    type: "select",
-    name: "packageManager",
-    message: "Which package manager are you using?",
-    hint: "Space to select.",
-    instructions: false,
-    choices: [
-      {
-        title: "npm",
-        value: "npm",
-      },
-      {
-        title: "yarn",
-        value: "yarn",
-      },
-      {
-        title: "pnpm",
-        value: "pnpm",
-      },
-    ],
-  });
+async function configureTailwind(framework: Framework) {
+  const { init, getConfig, setConfig } = useTailwindConfig();
 
-  return packageManager;
-}
-
-async function promptForDestinationDir() {
-  const { dir } = await prompts([
-    {
-      type: "text",
-      name: "dir",
-      message: "Where would you like to install the component(s)?",
-      initial: "./components/ui",
-    },
-  ]);
-
-  return dir;
-}
-
-/* write styles into css location defined */
-async function writeStyles() {
-  const cssDirPath = getConfig("cssDir");
-  const cssFileName = getConfig("cssFileName");
-
-  /* check if path to css file exists */
-  if (!existsSync(cssDirPath)) {
-    await fs.mkdir(cssDirPath, { recursive: true });
+  if (!existsSync("tailwind.config.js")) {
+    await init();
   }
 
-  await fs.writeFile(path.join(cssDirPath, cssFileName), STYLES, "utf8");
+  const spinner = ora("Initializing tailwindcss and shadcn/ui theme").start();
+
+  const cssFilePath = path.resolve(framework.srcDir, framework.tailwindcssDir);
+
+  const config = await getConfig();
+
+  config.content = framework.tailwindContent;
+
+  await setConfig(config);
+
+  if (!existsSync(cssFilePath)) {
+    await fs.mkdir(path.dirname(cssFilePath), { recursive: true });
+    await fs.writeFile(cssFilePath, BASE_STYLES);
+  }
+
+  spinner.succeed("tailwindcss and shadcn/ui theme initialized");
 }
 
+async function promptForComponents() {
+  const components = await getAvailableComponents();
+
+  const { selectedComponents } = await prompts({
+    type: "multiselect",
+    name: "selectedComponents",
+    message: "Which components do you want to add?",
+    hint: "Space to select.",
+    instructions: false,
+    choices: components.map((c) => ({
+      title: c.name,
+      value: c.id,
+      description: c.description,
+    })),
+  });
+
+  return selectedComponents;
+}
 
 main();

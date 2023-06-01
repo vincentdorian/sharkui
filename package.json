@@ -1,19 +1,49 @@
 {
+  "name": "sharkui",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
+  "author": {
+    "name": "Vincent Dorian",
+    "email": "hi@vincentdorian.me",
+    "url": "https://vincentdorian.me"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md,vue}\""
+    "dev": "turbo run dev --parallel",
+    "format": "prettier --write \"**/*.{ts,tsx,md,vue}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,vue}\"",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "preview": "turbo run preview",
+    "test:cli": "turbo run test --filter @sharkui/cli"
   },
-  "devDependencies": {
-    "prettier": "^2.5.1",
-    "turbo": "^1.9.3"
+  "husky": {
+    "hooks": {
+      "pre-commit": "turbo run lint:fix && turbo run format:check"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "packageManager": "pnpm@7.15.0",
-  "name": "sharkui",
   "dependencies": {
-    "nuxt": "^3.4.3"
+    "cross-env": "^7.0.3",
+    "turbo": "^1.9.9"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "eslint": "^8.41.0",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "vitest": "^0.31.1"
   }
 }

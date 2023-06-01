@@ -1,15 +1,43 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["COMPONENTS_BASE_URL"],
   "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".nuxt/**"]
-    },
-    "lint": {},
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "build": {
+      "env": ["COMPONENTS_BASE_URL"],
+      "dependsOn": ["^build"],
+      "outputs": [".nuxt/**", "dist/**"]
+    },
+    "format": {
+      "cache": false,
+      "outputs": []
+    },
+    "format:check": {
+      "cache": false,
+      "outputs": []
+    },
+    "lint": {
+      "cache": false,
+      "outputs": []
+    },
+    "lint:fix": {
+      "cache": false,
+      "outputs": []
+    },
+    "test": {
+      "cache": false,
+      "outputs": []
+    },
+    "preview": {
+      "cache": false,
+      "outputs": []
+    },
+    "test:cli":{
+      "cache": false,
+      "outputs": []
     }
   }
 }

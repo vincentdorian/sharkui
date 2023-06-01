@@ -1,0 +1,5 @@
+dist
+node_modules
+.nuxt
+build
+apps/web/server/api/components.json

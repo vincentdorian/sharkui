@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-      "jsx": "preserve",
-      "moduleResolution": "node"
-  },
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
-}

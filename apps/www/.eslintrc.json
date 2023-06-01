@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "root": true,
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "rules": {
+    "vue/multi-word-component-names": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "error",
+    "vue/one-component-per-file": "off"
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cn"]
+    }
+  },
+  "plugins": ["tailwindcss", "@typescript-eslint"],
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "parser": "vue-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "sourceType": "module"
+      }
+    }
+  ]
+}

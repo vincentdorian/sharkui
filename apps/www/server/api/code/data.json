@@ -1,0 +1,18 @@
+[
+  {
+    "name": "accordion-demo",
+    "code": "<script setup lang=\"ts\">\r\nimport {\r\n  SharkAccordion,\r\n  SharkAccordionContent,\r\n  SharkAccordionItem,\r\n  SharkAccordionTrigger,\r\n} from \"@/components/ui/accordion\";\r\n</script>\r\n<template>\r\n  <SharkAccordion class=\"w-full\">\r\n    <SharkAccordionItem value=\"what-is-vue\">\r\n      <SharkAccordionTrigger>\r\n        <span> What is Vue? </span>\r\n      </SharkAccordionTrigger>\r\n      <SharkAccordionContent>\r\n        Vue (pronounced /vjuː/, like view) is a progressive framework for\r\n        building user interfaces.\r\n      </SharkAccordionContent>\r\n    </SharkAccordionItem>\r\n    <SharkAccordionItem value=\"what-is-ark\">\r\n      <SharkAccordionTrigger> What is Ark UI? </SharkAccordionTrigger>\r\n      <SharkAccordionContent>\r\n        Ark UI is the backbone of Chakra UI that is built with Zag.js.\r\n      </SharkAccordionContent>\r\n    </SharkAccordionItem>\r\n    <SharkAccordionItem value=\"which-frameworks\">\r\n      <SharkAccordionTrigger>\r\n        Which frameworks are supported?\r\n      </SharkAccordionTrigger>\r\n      <SharkAccordionContent>\r\n        Currently the setup is only available for Nuxt 3, but all major\r\n        frameworks using Vue 3 can use sharkui.\r\n      </SharkAccordionContent>\r\n    </SharkAccordionItem>\r\n  </SharkAccordion>\r\n</template>\r\n"
+  },
+  {
+    "name": "badge-demo",
+    "code": "<script setup lang=\"ts\">\r\nimport { Badge } from \"@/components/ui/badge\";\r\n</script>\r\n<template>\r\n  <Badge> Badge </Badge>\r\n</template>\r\n"
+  },
+  {
+    "name": "button-demo",
+    "code": "<script setup lang=\"ts\">\r\nimport { SharkButton } from \"@/components/ui/button\";\r\n</script>\r\n<template>\r\n  <SharkButton> Button </SharkButton>\r\n</template>\r\n"
+  },
+  {
+    "name": "sheet-demo",
+    "code": "<script setup lang=\"ts\">\r\nimport { buttonVariants } from \"~/components/ui/button\";\r\nimport {\r\n  SharkSheetClose,\r\n  SharkSheetContent,\r\n  SharkSheetDescription,\r\n  SharkSheetFooter,\r\n  SharkSheetHeader,\r\n  SharkSheetTitle,\r\n  SharkSheetOverlay,\r\n  SharkSheet,\r\n  SharkSheetTrigger,\r\n} from \"~/components/ui/sheet\";\r\n</script>\r\n<template>\r\n  <div>\r\n    <SharkSheet>\r\n      <SharkSheetTrigger :class=\"buttonVariants({ variant: 'outline' })\">\r\n        Open Sheet\r\n      </SharkSheetTrigger>\r\n\r\n      <Teleport to=\"body\">\r\n        <SharkSheetOverlay />\r\n        <SharkSheetContent position=\"bottom\" size=\"sm\">\r\n          <SharkSheetHeader>\r\n            <SharkSheetTitle> Sheet Title </SharkSheetTitle>\r\n            <SharkSheetDescription>\r\n              A sheet that can be positioned at the top, bottom, left, or right.\r\n            </SharkSheetDescription>\r\n          </SharkSheetHeader>\r\n          <div class=\"grid\">\r\n            Here is some content\r\n          </div>\r\n          <SharkSheetFooter>\r\n            <SharkSheetClose :class=\"buttonVariants()\">\r\n              Close Sheet\r\n            </SharkSheetClose>\r\n          </SharkSheetFooter>\r\n        </SharkSheetContent>\r\n      </Teleport>\r\n    </SharkSheet>\r\n  </div>\r\n</template>\r\n"
+  }
+]
