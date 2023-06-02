@@ -12,6 +12,18 @@
     "code": "<script setup lang=\"ts\">\r\nimport { SharkButton } from \"@/components/ui/button\";\r\n</script>\r\n<template>\r\n  <SharkButton> Button </SharkButton>\r\n</template>\r\n"
   },
   {
+    "name": "input-demo",
+    "code": "<script setup lang=\"ts\">\nimport { SharkInput } from \"@/components/ui/input\";\n\nconst email = ref(\"\");\n\n</script>\n<template>\n  <SharkInput v-model=\"email\" placeholder=\"Email\" />\n</template>\n"
+  },
+  {
+    "name": "input-demo-type-number",
+    "code": "<script setup lang=\"ts\">\nimport { SharkInput } from \"@/components/ui/input\";\n\nconst count = ref(\"\");\n\n</script>\n<template>\n  <SharkInput type=\"number\" v-model=\"count\" placeholder=\"Count\" />\n</template>\n"
+  },
+  {
+    "name": "input-demo-with-label",
+    "code": "<script setup lang=\"ts\">\nimport { SharkInput } from \"@/components/ui/input\";\nimport { SharkLabel } from \"~/components/ui/label\";\n\nconst company = ref(\"\");\n</script>\n<template>\n  <div className=\"grid w-full max-w-sm items-center gap-1.5\">\n    <SharkLabel for=\"company\">Company name</SharkLabel>\n    <SharkInput id=\"company\" v-model=\"company\" placeholder=\"Type here\" />\n  </div>\n</template>\n"
+  },
+  {
     "name": "sheet-demo",
     "code": "<script setup lang=\"ts\">\r\nimport { buttonVariants } from \"~/components/ui/button\";\r\nimport {\r\n  SharkSheetClose,\r\n  SharkSheetContent,\r\n  SharkSheetDescription,\r\n  SharkSheetFooter,\r\n  SharkSheetHeader,\r\n  SharkSheetTitle,\r\n  SharkSheetOverlay,\r\n  SharkSheet,\r\n  SharkSheetTrigger,\r\n} from \"~/components/ui/sheet\";\r\n</script>\r\n<template>\r\n  <div>\r\n    <SharkSheet>\r\n      <SharkSheetTrigger :class=\"buttonVariants({ variant: 'outline' })\">\r\n        Open Sheet\r\n      </SharkSheetTrigger>\r\n\r\n      <Teleport to=\"body\">\r\n        <SharkSheetOverlay />\r\n        <SharkSheetContent position=\"bottom\" size=\"sm\">\r\n          <SharkSheetHeader>\r\n            <SharkSheetTitle> Sheet Title </SharkSheetTitle>\r\n            <SharkSheetDescription>\r\n              A sheet that can be positioned at the top, bottom, left, or right.\r\n            </SharkSheetDescription>\r\n          </SharkSheetHeader>\r\n          <div class=\"grid\">\r\n            Here is some content\r\n          </div>\r\n          <SharkSheetFooter>\r\n            <SharkSheetClose :class=\"buttonVariants()\">\r\n              Close Sheet\r\n            </SharkSheetClose>\r\n          </SharkSheetFooter>\r\n        </SharkSheetContent>\r\n      </Teleport>\r\n    </SharkSheet>\r\n  </div>\r\n</template>\r\n"
   }

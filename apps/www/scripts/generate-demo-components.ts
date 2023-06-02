@@ -19,7 +19,7 @@ files.forEach((file) => {
 });
 
 fs.writeFileSync(
-  path.resolve("./server/api/code/demo-components.json"),
+  path.resolve("./server/api/code/data.json"),
   JSON.stringify(payload, null, 2)
 );
 

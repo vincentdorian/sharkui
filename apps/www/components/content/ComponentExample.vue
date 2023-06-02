@@ -34,7 +34,7 @@ onMounted(() => {
 watch(
   data,
   async () => {
-    if (data.value) {
+    if (data.value && data.value?.code) {
       html.value = await highlighter.codeToHtml(data.value?.code, {
         lang: "vue",
       });
@@ -74,7 +74,7 @@ watch(
         <SharkTabContent value="preview" class="rounded-md border">
           <div
             :class="
-              cn('flex min-h-[350px] justify-center p-10', {
+              cn('flex min-h-[350px] justify-center p-10 [&_input]:max-w-sm', {
                 'items-center': align === 'center',
                 'items-start': align === 'start',
                 'items-end': align === 'end',
