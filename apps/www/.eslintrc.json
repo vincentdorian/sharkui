@@ -15,7 +15,8 @@
     "@typescript-eslint/no-var-requires": "off",
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "error",
-    "vue/one-component-per-file": "off"
+    "vue/one-component-per-file": "off",
+    "vue/max-attributes-per-line": "off"
   },
   "settings": {
     "tailwindcss": {

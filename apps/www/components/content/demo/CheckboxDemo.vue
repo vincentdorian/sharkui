@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import { Checkbox, CheckboxInput } from "@ark-ui/vue";
-import { cn } from "~/lib/utils";
+import {
+  SharkCheckbox,
+  SharkCheckboxControl,
+  SharkCheckboxInput,
+  SharkCheckboxLabel,
+} from "@/components/ui/checkbox";
+import { CheckIcon } from "lucide-vue-next";
 
 const checked = ref(false);
 </script>
 <template>
-  <Checkbox v-model="checked">
-    <CheckboxInput
-      :class="
-        cn(
-          'peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground'
-        )
-      "
-    />
-  </Checkbox>
+  <SharkCheckbox v-model="checked">
+    <SharkCheckboxLabel>SharkCheckbox</SharkCheckboxLabel>
+  </SharkCheckbox>
 </template>

@@ -10,6 +10,5 @@ defineProps<{
 </template>
 <style>
 pre code .line {
-  
 }
 </style>

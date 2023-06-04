@@ -29,5 +29,5 @@ const payload = components
 
 fs.writeFileSync(
   path.resolve("./server/api/components.json"),
-  JSON.stringify(payload, null, 2),
+  JSON.stringify(payload, null, 2)
 );

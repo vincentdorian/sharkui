@@ -1,10 +1,11 @@
 import {
   Checkbox as ArkCheckbox,
   CheckboxControl as ArkCheckboxControl,
-  CheckboxLabel as ArkCeckboxLabel,
-  CheckboxInput as ArkCeckboxInput,
+  CheckboxLabel as ArkCheckboxLabel,
+  CheckboxInput as ArkCheckboxInput,
 } from "@ark-ui/vue";
 import { UseCheckboxProps } from "@ark-ui/vue/dist/checkbox/checkbox";
+import { CheckIcon } from "lucide-vue-next";
 import { cn } from "~/lib/utils";
 
 const SharkCheckbox = defineComponent({
@@ -18,22 +19,29 @@ const SharkCheckbox = defineComponent({
   },
   emits: ["update:modelValue"],
   setup(props, { slots, attrs, emit }) {
-    const valueProxy = computed({
+    const proxy = computed({
       get: () => props.modelValue,
       set: (value) => emit("update:modelValue", value),
     });
 
     return () => (
-      <ArkCheckbox v-model={valueProxy}>{slots.default?.()}</ArkCheckbox>
+      <ArkCheckbox v-model={proxy.value}>{slots.default?.()}</ArkCheckbox>
     );
   },
 });
 
 const SharkCheckboxControl = defineComponent({
   name: "SharkCheckboxControl",
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     return () => {
-      <ArkCheckboxControl>{slots.default?.()}</ArkCheckboxControl>;
+      <ArkCheckboxControl
+        class={cn(
+          "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+          attrs.class ?? ""
+        )}
+      >
+        <CheckIcon class="w-4 h-4" />
+      </ArkCheckboxControl>;
     };
   },
 });
@@ -41,8 +49,9 @@ const SharkCheckboxControl = defineComponent({
 const SharkCheckboxLabel = defineComponent({
   name: "SharkCheckboxLabel",
   setup(props, { slots }) {
+    console.log(slots)
     return () => {
-      <ArkCeckboxLabel>{slots.default?.()}</ArkCeckboxLabel>;
+      <ArkCheckboxLabel>{slots.default?.()}</ArkCheckboxLabel>;
     };
   },
 });
@@ -50,16 +59,7 @@ const SharkCheckboxLabel = defineComponent({
 const SharkCheckboxInput = defineComponent({
   name: "SharkCheckboxInput",
   setup(props, { slots, attrs }) {
-    return () => (
-      <ArkCeckboxInput
-        class={cn(
-          "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
-          attrs.class ?? ""
-        )}
-      >
-        {slots.default?.()}
-      </ArkCeckboxInput>
-    );
+    return () => <ArkCheckboxInput>{slots.default?.()}</ArkCheckboxInput>;
   },
 });
 

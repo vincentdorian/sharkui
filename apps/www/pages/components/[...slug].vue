@@ -28,10 +28,7 @@ useContentHead(page);
           <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
             {{ page.title }}
           </h1>
-          <p
-            v-if="page.description"
-            class="text-lg text-muted-foreground"
-          >
+          <p v-if="page.description" class="text-lg text-muted-foreground">
             {{ page.description }}
           </p>
           <div class="flex items-center space-x-2 pt-4">
@@ -51,11 +48,7 @@ useContentHead(page);
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                />
+                <circle cx="12" cy="12" r="10" />
               </svg>
               shadcn/ui {{ page.title }}
             </a>

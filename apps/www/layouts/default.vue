@@ -77,7 +77,7 @@ const contentNavigation: {
             <nav class="flex items-center space-x-1">
               <a
                 href="https://github.com/vincentdorian/sharkui"
-                :class="buttonVariants({ variant: 'ghost' })"
+                :class="cn(buttonVariants({ variant: 'ghost' }), 'h-9 w-9 px-0')"
               >
                 <svg viewBox="0 0 438.549 438.549" class="h-5 w-5">
                   <path
@@ -86,7 +86,7 @@ const contentNavigation: {
                   />
                 </svg>
               </a>
-              <SharkButton variant="ghost" size="sm" @click="toggleColorMode()">
+              <SharkButton class="px-0 h-9 w-9" variant="ghost" size="sm" @click="toggleColorMode()">
                 <SunMedium
                   v-if="$colorMode.preference === 'light'"
                   class="h-5 w-5"
@@ -175,7 +175,7 @@ const contentNavigation: {
             <nav class="flex items-center space-x-1">
               <a
                 href="https://github.com/vincentdorian/sharkui"
-                :class="buttonVariants({ variant: 'ghost' })"
+                :class="cn(buttonVariants({ variant: 'ghost' }), 'h-9 w-9 px-0')"
               >
                 <svg viewBox="0 0 438.549 438.549" class="h-5 w-5">
                   <path
@@ -209,7 +209,7 @@ const contentNavigation: {
           <p
             class="text-center text-sm leading-loose text-muted-foreground md:text-left"
           >
-            Design by {{ " " }}
+            Originally designed by {{ " " }}
             <a
               href="https://ui.shadcn.com"
               target="_blank"

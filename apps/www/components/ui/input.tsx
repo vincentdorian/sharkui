@@ -30,7 +30,6 @@ const SharkInput = defineComponent({
       get: () => props.modelValue,
       set: (value) => emit("update:modelValue", value),
     });
-  
 
     return () => (
       <input

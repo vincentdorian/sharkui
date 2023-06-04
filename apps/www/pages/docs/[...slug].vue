@@ -25,10 +25,7 @@ useContentHead(page);
           <h1 class="scroll-m-20 text-4xl font-bold tracking-tight">
             {{ page.title }}
           </h1>
-          <p
-            v-if="page.description"
-            class="text-lg text-muted-foreground"
-          >
+          <p v-if="page.description" class="text-lg text-muted-foreground">
             {{ page.description }}
           </p>
           <div

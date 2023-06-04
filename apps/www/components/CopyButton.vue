@@ -24,19 +24,13 @@ watchEffect(() => {
   <button
     :class="
       cn(
-        'relative z-20 inline-flex h-6 w-6 items-center justify-center rounded-md border bg-background text-sm font-medium transition-all hover:bg-muted focus:outline-none',
+        'relative z-20 inline-flex h-6 w-6 items-center justify-center rounded-md border bg-background text-sm font-medium transition-all hover:bg-muted focus:outline-none'
       )
     "
     @click="copyCode()"
   >
     <span class="sr-only">Copy</span>
-    <CheckIcon
-      v-if="hasCopied"
-      class="h-3 w-3"
-    />
-    <CopyIcon
-      v-else
-      class="h-3 w-3"
-    />
+    <CheckIcon v-if="hasCopied" class="h-3 w-3" />
+    <CopyIcon v-else class="h-3 w-3" />
   </button>
 </template>

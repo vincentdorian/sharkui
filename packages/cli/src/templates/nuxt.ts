@@ -10,6 +10,7 @@ const NUXT_TAILWIND_CONTENT = [
   "./components/**/*.{js,vue,ts,tsx,jsx}",
   "./layouts/**/*.vue",
   "./pages/**/*.vue",
+  "./app.vue",
   "./plugins/**/*.{js,ts}",
   "./nuxt.config.{js,ts}",
 ];

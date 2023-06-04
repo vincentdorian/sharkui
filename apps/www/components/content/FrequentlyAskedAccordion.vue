@@ -16,11 +16,7 @@ const props = defineProps<{
 </script>
 <template>
   <SharkAccordion>
-    <SharkAccordionItem
-      v-for="item in items"
-      :key="item.id"
-      :value="item.id"
-    >
+    <SharkAccordionItem v-for="item in items" :key="item.id" :value="item.id">
       <SharkAccordionTrigger>
         {{ item.title }}
       </SharkAccordionTrigger>

@@ -10,7 +10,10 @@ const files = fs.readdirSync(resolve("components/content/demo"));
 
 files.forEach((file) => {
   const fileName = file.split(".");
-  const code = fs.readFileSync(resolve("components/content/demo/" + file), "utf-8");
+  const code = fs.readFileSync(
+    resolve("components/content/demo/" + file),
+    "utf-8"
+  );
 
   payload.push({
     name: toKebabCase(fileName[0]),

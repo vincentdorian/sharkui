@@ -6,12 +6,9 @@ shadcnui: https://ui.shadcn.com/docs/components/checkbox
 arkui: https://ark-ui.com/docs/vue/components/checkbox
 ---
 
-::component-example{align="center" name="checkbox-demo"}
-:::checkbox-demo
+::alert{variant="destructive"}
+#title
+Please be patient.
+#description
+This component is not yet implemented, as there are some issues with the underlying library.
 ::
-
-## Installation
-
-```sh
-npx @sharkui/cli add checkbox
-```

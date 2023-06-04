@@ -3,6 +3,8 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/color-mode", "@nuxt/content", "@nuxtjs/google-fonts"],
   ssr: true,
 
+  plugins: [{ src: "~/plugins/vercel.ts", mode: "client" }],
+
   googleFonts: {
     preload: true,
     download: true,
@@ -30,7 +32,7 @@ export default defineNuxtConfig({
   content: {
     documentDriven: true,
     highlight: {
-      theme: 'css-variables',
+      theme: "css-variables",
     },
   },
 

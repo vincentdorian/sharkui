@@ -117,4 +117,9 @@ const SharkAccordionContent = defineComponent({
   },
 });
 
-export { SharkAccordion, SharkAccordionTrigger, SharkAccordionItem, SharkAccordionContent };
+export {
+  SharkAccordion,
+  SharkAccordionTrigger,
+  SharkAccordionItem,
+  SharkAccordionContent,
+};

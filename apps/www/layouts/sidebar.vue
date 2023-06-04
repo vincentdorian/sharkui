@@ -55,7 +55,7 @@ const contentNavigation: {
                         'text-muted-foreground': $route.path !== item._path,
                         'text-foreground font-medium':
                           $route.path === item._path,
-                      },
+                      }
                     )
                   "
                 >

@@ -4,13 +4,12 @@ import { ChevronRightIcon } from "lucide-vue-next";
 
 import { buttonVariants } from "./ui/button";
 
-const { page } = useContent();  
+const { page } = useContent();
 
 const [prev, next] = await queryContent()
-  .only(['_path', 'title'])
-  .sort({ position: 1})
-  .findSurround(page.value._path)
-
+  .only(["_path", "title"])
+  .sort({ position: 1 })
+  .findSurround(page.value._path);
 </script>
 <template>
   <div class="flex flex-row items-center justify-between">

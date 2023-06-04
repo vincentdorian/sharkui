@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const code = demoComponent.code;
-    
+
     return {
       code: code,
     };

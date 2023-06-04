@@ -146,4 +146,10 @@ const SharkTabIndicator = defineComponent({
   },
 });
 
-export { SharkTabs, SharkTabList, SharkTabTrigger, SharkTabContent, SharkTabIndicator };
+export {
+  SharkTabs,
+  SharkTabList,
+  SharkTabTrigger,
+  SharkTabContent,
+  SharkTabIndicator,
+};

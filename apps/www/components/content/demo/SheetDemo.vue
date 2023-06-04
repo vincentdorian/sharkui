@@ -28,9 +28,7 @@ import {
               A sheet that can be positioned at the top, bottom, left, or right.
             </SharkSheetDescription>
           </SharkSheetHeader>
-          <div class="grid">
-            Here is some content
-          </div>
+          <div class="grid">Here is some content</div>
           <SharkSheetFooter>
             <SharkSheetClose :class="buttonVariants()">
               Close Sheet

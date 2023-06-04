@@ -37,7 +37,7 @@ export default defineEventHandler((event) => {
     const componentIds = query.components.split(",");
 
     const componentList = components.filter((component) =>
-      componentIds.includes(component.id),
+      componentIds.includes(component.id)
     );
 
     return componentList;

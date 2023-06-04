@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { buttonVariants } from "@/components/ui/button";
-import SheetDemo from "~/components/content/demo/SheetDemo.vue";
+import {
+  Checkbox,
+  CheckboxControl,
+  CheckboxInput,
+  CheckboxLabel,
+} from "@ark-ui/vue";
 
 useHead({
-  title: "shadcn/ui + Ark UI = sharkui",
+  title: "sharkui",
   meta: [
     {
       name: "description",
-      content: "The popular component library for Vue.js",
+      content:
+        "Shadcn/ui, the most loved component library is coming to Vue.js",
     },
   ],
 });
@@ -29,7 +35,7 @@ useHead({
           and more.
         </p>
 
-        <div class="mt-2 flex flex-col items-center gap-4 md:flex-row">
+        <div class="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10">
           <NuxtLink
             :class="buttonVariants({ variant: 'default' })"
             href="/docs"

@@ -1,6 +1,6 @@
 ---
 position: 5
-title: Input 
+title: Input
 description: A simple Input
 shadcnui: https://ui.shadcn.com/docs/components/input
 ---

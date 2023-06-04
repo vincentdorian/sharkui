@@ -8,7 +8,9 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div class="relative overflow-hidden rounded-lg border text-sm [&:not(:first-child)]:mt-6">
+  <div
+    class="relative overflow-hidden rounded-lg border text-sm [&:not(:first-child)]:mt-6"
+  >
     <div class="overflow-auto p-4">
       <slot />
     </div>

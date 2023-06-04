@@ -2,6 +2,7 @@ import { type ClassValue } from "clsx";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { type Slots, type VNode, cloneVNode, isVNode } from "vue";
+import { VueProps } from "./types";
 
 export function useUniqueChild(slots: Slots, componentName: string) {
   const validChildren = getValidChildren(slots);
@@ -33,4 +34,8 @@ export function copyToClipboard(value: string) {
   el.select();
   document.execCommand("copy");
   document.body.removeChild(el);
+}
+
+export function createVueProps<T extends object>(properties: VueProps<T>) {
+  return properties
 }
