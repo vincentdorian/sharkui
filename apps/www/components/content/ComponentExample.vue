@@ -8,44 +8,22 @@ import {
 
 import { cn } from "@/lib/utils";
 
-import { getHighlighter } from "shiki-es";
-
-const highlighter = await getHighlighter({
-  theme: "css-variables",
-  langs: ["vue"],
-});
-
 const props = defineProps<{
   align?: "center" | "start" | "end";
   name?: string;
 }>();
 
-const html = ref("");
-const code = ref("");
+const code = ref();
 
-const { data, error, pending } = useFetch("/api/code/" + props.name);
+const { data } = await useAsyncData("code", () =>
+  queryContent("/code/" + props.name).findOne()
+);
 
 const hasMounted = ref(false);
 
 onMounted(() => {
   hasMounted.value = true;
 });
-
-watch(
-  data,
-  async () => {
-    if (data.value && data.value?.code) {
-      html.value = await highlighter.codeToHtml(data.value?.code, {
-        lang: "vue",
-      });
-
-      code.value = data.value?.code;
-    }
-  },
-  {
-    deep: true,
-  }
-);
 </script>
 <template>
   <div :class="cn('group relative my-4 flex flex-col space-y-2')">
@@ -68,7 +46,6 @@ watch(
             <button>Code</button>
           </SharkTabTrigger>
         </SharkTabList>
-        <CopyButton :value="code ?? 'code'" class="absolute right-4 top-20" />
       </div>
       <div>
         <SharkTabContent value="preview" class="rounded-md border">
@@ -86,14 +63,7 @@ watch(
           </div>
         </SharkTabContent>
         <SharkTabContent value="code">
-          <div class="overflow-hidden rounded-md border">
-            <pre class="max-h-[350px] overflow-auto px-4 text-sm font-thin">
-                <code
-                class="font-thin"
-                  v-html="html"
-                />
-              </pre>
-          </div>
+          <ContentRenderer :value="data" />
         </SharkTabContent>
       </div>
     </SharkTabs>

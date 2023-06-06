@@ -5,6 +5,10 @@ export default defineNuxtConfig({
 
   plugins: [{ src: "~/plugins/vercel.ts", mode: "client" }],
 
+  experimental: {
+    componentIslands: true
+  },
+  
   googleFonts: {
     preload: true,
     download: true,
