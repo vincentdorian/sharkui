@@ -5,7 +5,7 @@
     "build": "nuxt build",
     "generate:components": "ts-node --esm --project ./tsconfig.scripts.json ./scripts/generate-components.ts",
     "generate:demo-components": "ts-node --esm --project ./tsconfig.scripts.json ./scripts/generate-demo-components.ts",
-    "dev": "nuxt dev -p 3000",
+    "dev": "PORT=3000 nuxt dev",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
     "preview": "nuxt preview",

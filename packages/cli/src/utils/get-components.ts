@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import * as z from "zod";
 
-const baseUrl = "http://localhost:3002";
+const baseUrl = "https://sharkui-93j3z5iyn-vincentdorian.vercel.app/";
 
 const componentListSchema = z.object({
   count: z.number(),

@@ -135,9 +135,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
 }`;
 
-const BASE_DEPENDENCIES = ["tailwindcss", "autoprefixer", "postcss"];
+const BASE_DEPENDENCIES = [""];
 
 export { BASE_DEPENDENCIES, BASE_STYLES, BASE_TAILWIND_CONFIG };

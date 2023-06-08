@@ -10,12 +10,10 @@ import prompts from "prompts";
 import {
   BASE_DEPENDENCIES,
   BASE_STYLES,
-  BASE_TAILWIND_CONFIG,
 } from "./templates/base";
 import {
   NUXT_DEPENDENCIES,
-  NUXT_TAILWIND_CONTENT,
-  setupNuxt,
+  NUXT_TAILWIND_CONTENT
 } from "./templates/nuxt";
 import { getAvailableComponents, getComponents } from "./utils/get-components";
 import { getPackageInfo } from "./utils/get-package-info";
@@ -35,10 +33,10 @@ type Framework = {
   disabled: boolean;
   deps: string[];
   tailwindContent: string[];
-  callback: () => void;
+  callback?: () => void;
 };
 
-const FRAMEWORKS_OPTIONS: Array<Framework> = [
+const FRAMEWORKS_OPTIONS: Framework[] = [
   {
     name: "nuxt",
     srcDir: ".",
@@ -47,8 +45,7 @@ const FRAMEWORKS_OPTIONS: Array<Framework> = [
     layoutsDir: "./layouts",
     disabled: false,
     deps: NUXT_DEPENDENCIES,
-    tailwindContent: NUXT_TAILWIND_CONTENT,
-    callback: setupNuxt,
+    tailwindContent: NUXT_TAILWIND_CONTENT
   },
   {
     name: "inertiajs-vue",
@@ -92,7 +89,9 @@ async function main() {
 
       await configureTailwind(framework);
 
-      await framework.callback();
+      if (framework.callback) {
+        await framework.callback();
+      }
     });
 
   program

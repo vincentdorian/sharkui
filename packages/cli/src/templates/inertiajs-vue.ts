@@ -1,5 +1,5 @@
 // vue dependencies
-const INERTIAJS_VUE_DEPENDENCIES = ["@ark-ui/vue", "lucide-vue-next"];
+const INERTIAJS_VUE_DEPENDENCIES = ["@ark-ui/vue", "lucide-vue-next", "tailwindcss", "autoprefixer", "postcss"];
 
 // paths for tailwind to scan
 const INERTIAJS_VUE_TAILWIND_CONTENT = [
