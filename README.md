@@ -1,6 +1,6 @@
-## WIP
+## Development Paused
 
-This project is currently still in it's very early footsteps, but constantly worked on whenever I can find the time to it. 
+Unfortunately I do not find any time to work on this at the moment.
 
 ## Licensing
 
